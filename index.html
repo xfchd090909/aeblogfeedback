@@ -3,44 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>aeblog-意见反馈</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <title>意见反馈</title>
     <link rel="stylesheet" href="style.css">
+    <!-- 可选：引入Google Fonts（Roboto） -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main class="m3-container">
-        <div class="m3-card">
-            <header class="m3-card__header">
-                <span class="material-symbols-rounded">edit_note</span>
-                <h1 class="m3-title">意见反馈</h1>
-            </header>
-            
-            <form id="feedbackForm" class="m3-form">
-                <div class="m3-input-field">
-                    <input type="text" id="name" placeholder=" " autocomplete="off">
-                    <label for="name">您的姓名 (可选)</label>
-                </div>
-
-                <div class="m3-input-field">
-                    <input type="email" id="email" placeholder=" " autocomplete="off">
-                    <label for="email">您的邮箱 (可选)</label>
-                </div>
-
-                <div class="m3-input-field">
-                    <textarea id="message" placeholder=" " required></textarea>
-                    <label for="message">您的建议 *</label>
-                </div>
-
-                <button type="submit" id="submitBtn" class="m3-button">
-                    <span class="material-symbols-rounded">send</span>
-                    <span class="m3-button__text">提交反馈</span>
-                </button>
-            </form>
-            
-            <div id="status" class="m3-status"></div>
+    <div class="m3-card">
+        <div class="m3-card__header">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--m3-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <h1 class="m3-title">意见反馈</h1>
         </div>
-    </main>
+        <form id="feedbackForm">
+            <div class="m3-input-field">
+                <input type="text" id="name" placeholder=" " autocomplete="name">
+                <label for="name">您的称呼</label>
+            </div>
+            <div class="m3-input-field">
+                <input type="email" id="email" placeholder=" " autocomplete="email">
+                <label for="email">联系邮箱（选填）</label>
+            </div>
+            <div class="m3-input-field">
+                <textarea id="message" placeholder=" " required></textarea>
+                <label for="message">反馈内容</label>
+            </div>
+            <button type="submit" id="submitBtn" class="m3-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                发送反馈
+            </button>
+            <div id="status" class="m3-status"></div>
+        </form>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
