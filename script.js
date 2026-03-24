@@ -5,8 +5,16 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
     
     // 锁定按钮防止重复提交
     btn.disabled = true;
-    status.style.color = "inherit";
-    status.innerText = "正在发送...";
+    
+    // 重置动画状态
+    status.classList.remove('show');
+    
+    // 使用微小延迟重新触发 CSS 动画
+    setTimeout(() => {
+        status.style.color = "inherit";
+        status.innerText = "正在发送...";
+        status.classList.add('show');
+    }, 10);
 
     // 收集数据并处理可选字段
     const data = {
