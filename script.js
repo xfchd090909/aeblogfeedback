@@ -5,16 +5,8 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
     
     // 锁定按钮防止重复提交
     btn.disabled = true;
-    
-    // 重置动画状态
-    status.classList.remove('show');
-    
-    // 使用微小延迟重新触发 CSS 动画
-    setTimeout(() => {
-        status.style.color = "inherit";
-        status.innerText = "正在发送...";
-        status.classList.add('show');
-    }, 10);
+    status.style.color = "inherit";
+    status.innerText = "正在发送...";
 
     // 收集数据并处理可选字段
     const data = {
@@ -33,7 +25,17 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
         if (response.ok) {
             status.style.color = "var(--m3-success)";
             status.innerHTML = "<b>发送成功！感谢反馈。</b>";
-            e.target.reset();
+            // 延迟重置表单，保证动画可见
+            setTimeout(() => {
+                e.target.reset();
+                // 手动重置标签位置（兼容浏览器）
+                const labels = document.querySelectorAll('.m3-input-field label');
+                labels.forEach(label => {
+                    label.style.transform = 'translateY(-50%)';
+                    label.style.fontSize = '16px';
+                    label.style.color = 'var(--m3-outline)';
+                });
+            }, 500);
         } else {
             throw new Error('Server Error');
         }
@@ -43,4 +45,17 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
     } finally {
         btn.disabled = false;
     }
+});
+
+// 页面加载时初始化标签状态
+document.addEventListener('DOMContentLoaded', () => {
+    const inputFields = document.querySelectorAll('.m3-input-field input, .m3-input-field textarea');
+    inputFields.forEach(field => {
+        if (field.value.trim() !== '') {
+            const label = field.nextElementSibling;
+            label.style.transform = 'translateY(-120%)';
+            label.style.fontSize = '12px';
+            label.style.color = 'var(--m3-primary)';
+        }
+    });
 });
