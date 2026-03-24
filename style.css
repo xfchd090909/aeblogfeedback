@@ -1,7 +1,117 @@
-body { font-family: sans-serif; display: flex; justify-content: center; padding: 50px; background: #f4f7f6; }
-.container { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-textarea { height: 100px; resize: vertical; }
-button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; transition: 0.3s; }
-button:hover { background: #0056b3; }
-#status { margin-top: 15px; font-size: 14px; text-align: center; }
+:root {
+    --m3-primary: #0061a4;
+    --m3-on-primary: #ffffff;
+    --m3-surface: #f7f9ff;
+    --m3-surface-container: #eff4fc;
+    --m3-outline: #74777f;
+    --m3-error: #ba1a1a;
+    --m3-success: #006d39;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--m3-surface);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.m3-card {
+    background: var(--m3-surface-container);
+    padding: 24px;
+    border-radius: 28px; /* M3 标准大圆角 */
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.m3-card__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    color: var(--m3-primary);
+}
+
+.m3-title {
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* M3 浮动标签输入框 */
+.m3-input-field {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.m3-input-field input, 
+.m3-input-field textarea {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid var(--m3-outline);
+    border-radius: 12px;
+    background: transparent;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.m3-input-field textarea { height: 120px; resize: none; }
+
+.m3-input-field label {
+    position: absolute;
+    left: 12px;
+    top: 16px;
+    padding: 0 4px;
+    background: var(--m3-surface-container);
+    color: var(--m3-outline);
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+/* 标签浮动逻辑 */
+.m3-input-field input:focus ~ label,
+.m3-input-field input:not(:placeholder-shown) ~ label,
+.m3-input-field textarea:focus ~ label,
+.m3-input-field textarea:not(:placeholder-shown) ~ label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: var(--m3-primary);
+}
+
+.m3-input-field input:focus, .m3-input-field textarea:focus {
+    border: 2px solid var(--m3-primary);
+}
+
+/* M3 填充型按钮 */
+.m3-button {
+    width: 100%;
+    height: 48px;
+    background: var(--m3-primary);
+    color: var(--m3-on-primary);
+    border: none;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: box-shadow 0.2s;
+}
+
+.m3-button:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.m3-button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.m3-status {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 14px;
+    min-height: 20px;
+}
