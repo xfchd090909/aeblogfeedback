@@ -6,12 +6,18 @@
     --m3-outline: #74777f;
     --m3-error: #ba1a1a;
     --m3-success: #006d39;
+    /* 动画通用变量 */
+    --m3-transition: all 0.2s ease-in-out;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     background-color: var(--m3-surface);
     display: flex;
     justify-content: center;
@@ -26,6 +32,12 @@ body {
     width: 100%;
     max-width: 400px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    /* 卡片hover动画 */
+    transition: box-shadow 0.3s ease;
+}
+
+.m3-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .m3-card__header {
@@ -52,28 +64,38 @@ body {
 .m3-input-field textarea {
     width: 100%;
     padding: 16px;
-    border: 1px solid var(--m3-outline);
+    /* 统一边框宽度避免抖动 */
+    border: 2px solid var(--m3-outline);
     border-radius: 12px;
     background: transparent;
     font-size: 16px;
-    box-sizing: border-box;
     outline: none;
-    /* 修复：规范化过渡属性 */
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    /* 明确过渡属性 */
+    transition: var(--m3-transition);
 }
 
-.m3-input-field textarea { height: 120px; resize: none; }
+.m3-input-field textarea { 
+    height: 120px; 
+    resize: none; 
+    line-height: 1.5;
+}
 
 .m3-input-field label {
     position: absolute;
     left: 12px;
-    top: 16px;
+    /* 改用transform做平滑位移 */
+    top: 50%;
+    transform: translateY(-50%);
     padding: 0 4px;
     background: var(--m3-surface-container);
     color: var(--m3-outline);
     pointer-events: none;
-    /* 修复：规范写法，并使用 M3 标准缓动曲线让动画更丝滑 */
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+    /* 明确标签过渡属性 */
+    transition: transform 0.2s ease-in-out,
+                font-size 0.2s ease-in-out,
+                color 0.2s ease-in-out,
+                left 0.2s ease-in-out;
 }
 
 /* 标签浮动逻辑 */
@@ -81,16 +103,18 @@ body {
 .m3-input-field input:not(:placeholder-shown) ~ label,
 .m3-input-field textarea:focus ~ label,
 .m3-input-field textarea:not(:placeholder-shown) ~ label {
-    top: -10px;
+    transform: translateY(-120%);
     left: 10px;
     font-size: 12px;
     color: var(--m3-primary);
+    z-index: 2;
 }
 
-.m3-input-field input:focus, .m3-input-field textarea:focus {
-    /* 修复：使用边框颜色 + 内阴影替代 border-width，防止布局抖动打断动画 */
+.m3-input-field input:focus, 
+.m3-input-field textarea:focus {
     border-color: var(--m3-primary);
-    box-shadow: 0 0 0 1px var(--m3-primary);
+    /* 聚焦发光效果 */
+    box-shadow: 0 0 0 4px rgba(0, 97, 164, 0.1);
 }
 
 /* M3 填充型按钮 */
@@ -107,23 +131,30 @@ body {
     gap: 8px;
     cursor: pointer;
     font-weight: 500;
-    /* 修复：增加缩放和背景色的过渡动画 */
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 16px;
+    position: relative;
+    overflow: hidden;
+    /* 按钮完整过渡动画 */
+    transition: box-shadow 0.2s ease-in-out,
+                background 0.2s ease-in-out,
+                transform 0.1s ease-in-out;
 }
 
 .m3-button:hover { 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2); 
-    background: #005691; /* 鼠标悬浮稍微加深颜色 */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transform: scale(1.01);
 }
 
-/* 新增：按钮点击时的回弹动效 */
-.m3-button:active:not(:disabled) { 
-    transform: scale(0.96); 
+.m3-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
 }
 
 .m3-button:disabled { 
     opacity: 0.5; 
     cursor: not-allowed; 
+    transform: none;
+    box-shadow: none;
 }
 
 .m3-status {
@@ -131,14 +162,8 @@ body {
     text-align: center;
     font-size: 14px;
     min-height: 20px;
-    /* 新增：状态文字的淡入动画 */
-    opacity: 0;
-    transform: translateY(5px);
-    transition: all 0.3s ease;
-}
-
-/* 用于触发淡入动画的类 */
-.m3-status.show {
+    /* 状态文字过渡动画 */
+    transition: color 0.3s ease,
+                opacity 0.3s ease;
     opacity: 1;
-    transform: translateY(0);
 }
