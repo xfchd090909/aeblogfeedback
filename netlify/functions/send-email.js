@@ -11,14 +11,15 @@ exports.handler = async (event) => {
 
         // 使用 Netlify 环境变量注入 SMTP 配置
         const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST, // 如 smtp.gmail.com
-            port: 587,
-            secure: false, // 587 通常为 false，465 为 true
+            host: process.env.SMTP_HOST,
+            port: parseInt(process.env.SMTP_PORT), // 确保是数字 465
+            secure: true, // 如果端口是 465，这里必须设为 true
             auth: {
-                user: process.env.SMTP_USER, // 你的邮箱地址
-                pass: process.env.SMTP_PASS  // 你的应用授权码
-            }
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
         });
+
 
         await transporter.sendMail({
             from: `"${name}" <${process.env.SMTP_USER}>`, // 发件人显示
