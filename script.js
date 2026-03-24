@@ -22,14 +22,14 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
 
         if (response.ok) {
             status.style.color = "green";
-            status.innerText = "✅ 发送成功！感谢反馈。";
+            status.innerText = "发送成功！感谢反馈。";
             e.target.reset();
         } else {
             throw new Error('发送失败');
         }
     } catch (err) {
         status.style.color = "red";
-        status.innerText = "❌ 发送失败，请稍后再试。";
+        status.innerText = "发送失败，请稍后再试。";
     } finally {
         btn.disabled = false;
     }
