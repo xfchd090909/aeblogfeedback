@@ -3,20 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>用户反馈</title>
+    <title>意见反馈 - Material 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h2>输入信息提交反馈</h2>
-        <form id="feedbackForm">
-            <input type="text" id="name" placeholder="你的昵称(可选)" required>
-            <input type="email" id="email" placeholder="联系邮箱(可选)" required>
-            <textarea id="message" placeholder="你的建议..." required></textarea>
-            <button type="submit" id="submitBtn">提交</button>
-        </form>
-        <p id="status"></p>
-    </div>
+    <main class="m3-container">
+        <div class="m3-card">
+            <header class="m3-card__header">
+                <span class="material-symbols-rounded">edit_note</span>
+                <h1 class="m3-title">意见反馈</h1>
+            </header>
+            
+            <form id="feedbackForm" class="m3-form">
+                <div class="m3-input-field">
+                    <input type="text" id="name" placeholder=" " autocomplete="off">
+                    <label for="name">您的姓名 (可选)</label>
+                </div>
+
+                <div class="m3-input-field">
+                    <input type="email" id="email" placeholder=" " autocomplete="off">
+                    <label for="email">您的邮箱 (可选)</label>
+                </div>
+
+                <div class="m3-input-field">
+                    <textarea id="message" placeholder=" " required></textarea>
+                    <label for="message">您的建议 *</label>
+                </div>
+
+                <button type="submit" id="submitBtn" class="m3-button">
+                    <span class="material-symbols-rounded">send</span>
+                    <span class="m3-button__text">提交反馈</span>
+                </button>
+            </form>
+            
+            <div id="status" class="m3-status"></div>
+        </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
