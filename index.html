@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户反馈</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>联系我们</h2>
+        <form id="feedbackForm">
+            <input type="text" id="name" placeholder="您的姓名" required>
+            <input type="email" id="email" placeholder="您的邮箱" required>
+            <textarea id="message" placeholder="您的建议..." required></textarea>
+            <button type="submit" id="submitBtn">提交反馈</button>
+        </form>
+        <p id="status"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
